@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  petclinic:
+    image: bibek49/spring-project:latest
+    container_name: petclinic
+    ports:
+      - "8082:8080"                        # Host:Container port mapping
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://petclinic-db:3306/petclinic
+      SPRING_DATASOURCE_USERNAME: petclinic
+      SPRING_DATASOURCE_PASSWORD: petclinic
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    depends_on:
+      - petclinic-db
+    networks:
+      - petclinic-network
+    restart: always
+
+  petclinic-db:
+    image: mysql:8
+    container_name: petclinic-db
+    environment:
+      MYSQL_ROOT_PASSWORD: bibek
+      MYSQL_DATABASE: petclinic
+      MYSQL_USER: bibek
+      MYSQL_PASSWORD: 1234
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - petclinic-network
+    restart: always
+
+networks:
+  petclinic-network:
+    driver: bridge
+
+volumes:
+  db-data:
