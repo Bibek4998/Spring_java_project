@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: spring-app
-          image: your-docker-image:latest
+          image: bibek49/spring-project:latest
           ports:
             - containerPort: 8080
 ---
