@@ -109,7 +109,7 @@ git clone https://github.com/Bibek4998/Spring_java_project.git
 cd Spring_java_project
 docker build -t spring-java-app .
 
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 ## 12. Deploy Application on EC2
 
