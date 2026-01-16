@@ -1,0 +1,130 @@
+# Spring Java Project -----Steps
+
+
+## 2. Prerequisites
+* VM
+* Git
+* Java
+* Maven
+* Docker
+* Docker-compose
+
+### AWS
+
+* AWS account
+* EC2 instance (Ubuntu 20.04 / 22.04)
+* Key pair (.pem file)
+* Security Group allowing:
+
+  * SSH (22)
+  * Application port (8080)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+## 3. Clone the GitHub Repository
+
+git clone https://github.com/Bibek4998/Spring_java_project.git
+cd Spring_java_project
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+## 4. Project Structure
+
+* `src/` – Spring Boot application source code
+* `pom.xml` – Maven build configuration
+* `Dockerfile` – Docker image definition
+* `.gitignore` – Git ignored files
+* `README.md` – Project description
+
+---
+
+## 5. Build the Application
+
+1. Clean and build the project using Maven:
+
+cd /Spring_Java_Project/target/
+mvn clean package
+
+
+## 6. Build Docker Image
+
+docker build -t spring-java-app:latest .
+
+Verify image creation:
+
+docker images
+
+
+## 7. Push Code to GitHub
+
+git add .
+git commit -m "Spring Java application setup"
+git push origin main
+
+## 8. CI/CD Pipeline Flow
+
+1. Code push triggers CI pipeline
+2. Pipeline stages:
+
+   * Source code checkout
+   * EC2 deploy
+   * Navigate to project 
+   * Pull the latest code
+   * Maven Build
+   * Docker image build
+   * Deploy with docker-compose
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+## 9. Create EC2 Instance
+
+1. Launch an EC2 instance:
+
+   * AMI: Ubuntu 20.04 / 22.04
+   * Instance type: t2.micro
+2. Attach security group
+3. Download key pair
+
+Connect to EC2:
+
+ssh -i key.pem ubuntu@<EC2_PUBLIC_IP>
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+## 11. Setup Docker on EC2
+
+sudo apt update -y
+sudo apt install docker.io -y
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker ubuntu
+
+
+Logout and login again.
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+## Clone the repo 
+
+git clone https://github.com/Bibek4998/Spring_java_project.git
+cd Spring_java_project
+docker build -t spring-java-app .
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+## 12. Deploy Application on EC2
+
+docker run -d -p 8080:8080 --name spring-java-container spring-java-app
+
+
+Verify container:
+
+
+docker ps -a
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+## 13. Access the Application
+
+In browser:
+
+http://<EC2_PUBLIC_IP>:8080
